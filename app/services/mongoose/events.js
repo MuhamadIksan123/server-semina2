@@ -125,7 +125,7 @@ const updateEvents = async (req) => {
   const checkEvent = await Events.findOne({ _id: id });
 
   // jika id result false / null maka akan menampilkan error `Tidak ada acara dengan id` yang dikirim client
-  if (!checkEvent)
+  if (checkEvent)
     throw new NotFoundError(`Tidak ada acara dengan id :  ${id}`);
 
   // cari Events dengan field name dan id selain dari yang dikirim dari params
