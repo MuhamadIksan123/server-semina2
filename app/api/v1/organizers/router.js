@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { createCMSOrganizer, createCMSUsers } = require("./controller");
+const {
+  createCMSOrganizer,
+  createCMSUsers,
+  getCMSUsers,
+} = require("./controller");
 const {
   authenticateUser,
   authorizeRoles,
@@ -9,9 +13,15 @@ const {
 router.post(
   "/organizers",
   authenticateUser,
-  authorizeRoles('organizer'),
+  authorizeRoles('owner'),
   createCMSOrganizer
 );
-router.post("/users", authenticateUser, createCMSUsers);
+router.post("/users", authenticateUser, authorizeRoles('organizer'), createCMSUsers);
+router.get(
+  "/users",
+  authenticateUser,
+  authorizeRoles("owner"),
+  getCMSUsers
+);
 
 module.exports = router;
