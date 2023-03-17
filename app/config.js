@@ -4,4 +4,6 @@ module.exports = {
   urlDb: process.env.URL_MONGODB_DEV,
   jwtExpiration: "24h",
   jwtSecret: "jwtsecret",
+  gmail: process.env.GMAIL,
+  password: process.env.PASSWORD,
 };
